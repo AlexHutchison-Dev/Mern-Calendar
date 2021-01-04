@@ -9,7 +9,7 @@ module.exports = {
       new User({ username: req.body.username, name: req.body.name }),
       req.body.password,
       (err, user) => {
-        if (err) res.json(`error registering: ${err.message} `);
+        if (err) res.json(err.message);
         else {
           passport.authenticate("local")(req, res, () => {
             UserEventController.create(user._id);
