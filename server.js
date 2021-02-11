@@ -59,7 +59,7 @@ const UserEventController = require('./controllers/UserEventController');
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+
 //Routes
 app.post('/cal/addevent', UserEventController.addevent);
 app.post("/events", EventControl.query)
@@ -67,6 +67,7 @@ app.post('/cal', UserEventController.query);
 app.post("/user/register", UserControl.create);
 app.post("/user/login", UserControl.login);
 app.post("/user/logout", UserControl.logout);
-app.post("/cal/deleteevent", UserEventController.deleteevent);
+app.post("/cal/deleteevent", UserEventController.deleteevent)
 //Start Server
-app.listen(port, () => console.log(`server listening on port ${port}`));
+app.listen(port, () => console.log(`server listening on port ${port}`)
+);
