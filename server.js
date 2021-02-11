@@ -56,6 +56,9 @@ const UserControl = require("./controllers/UserController");
 const EventControl = require("./controllers/EventController");
 const UserEventController = require('./controllers/UserEventController');
 
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 
 //Routes
 app.post('/cal/addevent', UserEventController.addevent);
