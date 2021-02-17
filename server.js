@@ -16,6 +16,13 @@ var corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
+if (process.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(__dirname, 'client', 'build', 'index.html');
+  })
+}
+
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,9 +64,9 @@ const EventControl = require("./controllers/EventController");
 const UserEventController = require('./controllers/UserEventController');
 
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', (req,res) =>{
+//   res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 //Routes
 app.post('/cal/addevent', UserEventController.addevent);
 app.post("/events", EventControl.query)
